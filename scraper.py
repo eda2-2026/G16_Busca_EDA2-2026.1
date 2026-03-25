@@ -14,8 +14,8 @@ from typing import Optional
 URL = "https://www.adidas.com.br/tenis-homem"
 
 SEL_PRODUCT   = "article[data-testid='plp-product-card']"
-SEL_NEXT_PAGE = "a[data-testid='pagination-next-button']" # ajuste se necessário
-SEL_TOTAL_PAG = "[data-testid='pagination-pages-count']"      # ajuste se necessário
+SEL_NEXT_PAGE = "a[data-testid='pagination-next-button']" 
+SEL_TOTAL_PAG = "[data-testid='pagination-pages-count']"      
 
 
 def init_driver():
@@ -70,7 +70,7 @@ def get_total_pages(driver) -> int:
     """Tenta ler o total de páginas do DOM; fallback para 26."""
     try:
         el = driver.find_element(By.CSS_SELECTOR, SEL_TOTAL_PAG)
-        # Texto esperado: "Página 1 de 26" ou só "26"
+        
         text = el.get_attribute("innerText")
         return int(text.strip().split()[-1])
     except Exception:
@@ -121,7 +121,7 @@ def wait_for_new_page(driver, wait, old_first_card):
     try:
         wait.until(staleness_of(old_first_card))
     except Exception:
-        pass  # às vezes o Selenium já perdeu a referência — tudo bem
+        pass  
     wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, SEL_PRODUCT)))
 
 

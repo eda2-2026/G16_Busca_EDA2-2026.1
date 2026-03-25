@@ -1,7 +1,7 @@
 # Trabalho 1 EDA2 - Prof. Maurício
 ## Adidas E-commerce Scraper com Busca Indexada
 
-Projeto de web scraping e busca indexada desenvolvido para a disciplina de Estruturas de Dados e Algoritmos 2. O sistema raspa produtos do e-commerce da Adidas Brasil, armazena os dados em JSON e realiza buscas por faixa de preço usando um índice de dois níveis implementado em Ruby.
+Projeto de web scraping e busca indexada desenvolvido para a disciplina de Estruturas de Dados e Algoritmos 2. O sistema raspa produtos do e-commerce da Adidas Brasil, armazena os dados em JSON e realiza buscas por faixa de preço usando uma busca sequencial indexada de dois níveis implementado em Ruby.
 
 ---
 
@@ -13,7 +13,7 @@ scraper.py   →   products.json   →   search.rb
 ```
 
 - **`scraper.py`** — Selenium scraper que percorre todas as páginas de uma categoria, extrai nome e preço de cada produto e salva em `products.json`.
-- **`search.rb`** — Recebe o JSON via stdin, constrói um índice de dois níveis (blocos de 100) sobre o catálogo ordenado por preço e executa busca binária em O(log n) para filtrar por preço exato ou range.
+- **`search.rb`** — Recebe o JSON via stdin, constrói um índice de dois níveis (blocos de 10) sobre o catálogo ordenado por preço e executa busca binária em O(log n) para filtrar por preço exato ou range.
 - **`products.json`** — Cache local gerado pelo scraper. Na próxima execução, o programa pergunta se deseja reutilizá-lo, evitando raspar novamente.
 
 ---
@@ -25,8 +25,14 @@ scraper.py   →   products.json   →   search.rb
 ├── scraper.py        # Scraper + interface de busca
 ├── search.rb         # Engine de busca indexada
 ├── products.json     # Cache gerado automaticamente
+├── requirements.txt  # Dependências dos projetos
 └── README.md
 ```
+
+### Observações
+
+- O `scraper1.py` faz parte dos testes, ele no caso busca apenas na primeira página e aplica a busca sequencial indexada sobre os produtos encontrados.
+- No repositório tem-se um arquivo JSON chamado `products-example.json`, em que contém o conteúdo gerado pelo webscrapping da URL original. 
 
 ---
 
@@ -63,7 +69,7 @@ venv\Scripts\activate
 ### 3. Instale as dependências Python
 
 ```bash
-pip install selenium webdriver-manager
+pip install -r requirements.txt
 ```
 
 > O `webdriver-manager` baixa automaticamente o ChromeDriver compatível com sua versão do Chrome — não precisa instalar manualmente.
@@ -120,7 +126,7 @@ URL = "https://www.adidas.com.br/roupas-homem"
 URL = "https://www.adidas.com.br/calcados-infantis"
 ```
 
-> Acesse o site da Adidas, navegue até a aba desejada e copie a URL da barra de endereços. O script de paginação funciona para qualquer categoria, pois a Adidas usa o padrão `?start=N&sz=48` em todas elas.
+> Acesse o site da Adidas, navegue até a aba desejada e copie a URL da barra de endereços. O script de paginação funciona para qualquer categoria, pois a Adidas usa o padrão `?start=N&sz=48` em todas elas. Lembrando que a aba pode possuir **apenas** produtos.
 
 Após trocar a URL, **delete o `products.json`** para forçar um novo scraping:
 
@@ -137,10 +143,10 @@ O `search.rb` implementa um índice de dois níveis sobre o catálogo ordenado p
 
 | Nível | Estrutura | Tamanho do bloco |
 |-------|-----------|-----------------|
-| 1     | Índice primário sobre o catálogo | 100 produtos |
-| 2     | Índice secundário sobre o índice primário | 100 entradas |
+| 1     | Índice primário sobre o catálogo | 10 produtos |
+| 2     | Índice secundário sobre o índice primário | 10 entradas |
 
-A busca usa **busca binária em cascata**: primeiro localiza o bloco no índice 2, depois refina no índice 1, e só então faz a varredura linear no trecho relevante do catálogo — reduzindo drasticamente o número de comparações em catálogos grandes.
+A busca usa **busca binária nos dois indíces**: primeiro localiza o bloco no índice 2, depois refina no índice 1, e só então faz a varredura linear no trecho relevante do catálogo — reduzindo drasticamente o número de comparações em catálogos grandes.
 
 ---
 
