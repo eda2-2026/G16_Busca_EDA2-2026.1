@@ -38,7 +38,7 @@ def index():
                 # 1. Trocamos a lista ["ruby", "search.rb"] por uma string simples
                 # 2. Adicionamos shell=True (a solução para o Windows achar o comando)
                 result = subprocess.run(
-                    "ruby search.rb", 
+                    "ruby src/search.rb",
                     input=payload.encode("utf-8"),
                     capture_output=True,
                     check=True,
