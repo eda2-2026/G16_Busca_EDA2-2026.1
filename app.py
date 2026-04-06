@@ -17,10 +17,10 @@ def index():
 
         # Carrega o cache de produtos (prioriza products.json)
         products_path = None
-        if os.path.exists('products.json'):
-            products_path = 'products.json'
-        elif os.path.exists('products-example.json'):
-            products_path = 'products-example.json'
+        if os.path.exists('data/products.json'):
+            products_path = 'data/products.json'
+        elif os.path.exists('data/products-example.json'):
+            products_path = 'data/products-example.json'
 
         if products_path:
             with open(products_path, 'r', encoding='utf-8') as f:
