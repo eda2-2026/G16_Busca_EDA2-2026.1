@@ -20,9 +20,9 @@ Estruturas de dados e algoritmos utilizados:
 
 ## Screenshots
 
-![Screenshot 1](../images/Captura%20de%20Tela%202026-04-06%20às%2019.01.05.png)
+![Screenshot 1](images/Captura%20de%20Tela%202026-04-06%20às%2019.01.05.png)
 
-![Screenshot 2](../images/Captura%20de%20Tela%202026-04-06%20às%2019.02.35.png)
+![Screenshot 2](images/Captura%20de%20Tela%202026-04-06%20às%2019.02.35.png)
 
 ## Instalação 
 Linguagem: Python 3.11+ e Ruby 3.x<br>
