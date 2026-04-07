@@ -1,4 +1,4 @@
-# Motor de Busca E-commerce com Tabela Hash e Interface Web
+# Motor de Busca E-commerce com Tabela Hash, Busca Sequencial Indexada, Busca Binária e Interface Web
 
 Trabalho 1<br>
 Conteúdo da Disciplina: Algorítmos de busca<br>
@@ -7,7 +7,11 @@ Conteúdo da Disciplina: Algorítmos de busca<br>
 |Matrícula | Aluno |
 | -- | -- |
 | 23/1026302  |  Caio Lucas Messias Sabino |
-| 231026400  |  João Victor Pires Sapiência Santos |
+| 23/1026400  |  João Victor Pires Sapiência Santos |
+
+## Vídeo
+
+Link para o vídeo: https://youtu.be/8Afpxo3yA2A
 
 ## Sobre 
 O projeto implementa uma engine de busca para o catálogo da Adidas Brasil. O sistema combina Tabela Hash para busca textual por nome de produto e Busca Sequencial Indexada em dois níveis para filtragem por faixa de preço. A interseção dos resultados é feita via Set. A interface é servida por Flask (Python) e o processamento das estruturas de dados é feito em Ruby.
